@@ -7,13 +7,15 @@
         <Description>C# commons lib for stuff I copy around or overengineer</Description>
         <Copyright>DexrnZacAttack</Copyright>
         <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki/</PackageProjectUrl>
-        <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/tree/main/LICENSE</PackageLicenseUrl>
+        <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
-        <PackageReleaseNotes>Added Shiki.Common.Util.Identifier</PackageReleaseNotes>
+        <PackageReleaseNotes>Added license</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <AssemblyVersion>1.0.0</AssemblyVersion>
         <FileVersion>1.0.0</FileVersion>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Version>1.0.1</Version>
     </PropertyGroup>
 
 </Project>
