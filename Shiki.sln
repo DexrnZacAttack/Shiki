@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiki.Common", "Shiki.Common\Shiki.Common.csproj", "{BD66BEBF-55C2-4467-9547-64C68638BEA2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiki.CodeGenerator", "Shiki.CodeGenerator\Shiki.CodeGenerator.csproj", "{4B6E0252-E544-41EC-A349-37C65D499431}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
