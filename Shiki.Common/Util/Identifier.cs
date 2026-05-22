@@ -84,6 +84,27 @@ public sealed record Identifier : ISerializable
     {
         Namespace = nmsp.Replace(":", "");
         Path = path;
+        
+        if (Path.IsEmpty)
+        {
+            throw new ArgumentException("Path cannot be empty", nameof(path));
+        }
+    }
+    
+    /// <summary>
+    /// Creates a new Identifier
+    /// </summary>
+    /// <param name="nmsp">The namespace of the Identifier</param>
+    /// <param name="path">The path of the Identifier</param>
+    public Identifier(string nmsp, params ICollection<string> path)
+    {
+        Namespace = nmsp.Replace(":", "");
+        Path = [..path];
+
+        if (Path.IsEmpty)
+        {
+            throw new ArgumentException("Path cannot be empty", nameof(path));
+        }
     }
 
     /// <summary>

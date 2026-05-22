@@ -9,13 +9,28 @@
         <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki/</PackageProjectUrl>
         <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
-        <PackageReleaseNotes>Added license</PackageReleaseNotes>
+        <PackageReleaseNotes># Changes
+## Identifier
+Made it so that a path is required to NOT be empty in the creation of an Identifier.
+
+# New Classes
+## Result
+Rust-like Result type, very useful for things such as web requests or serial commands.
+
+## Observable &amp; Friends
+Allows you to create an object that can be observed like an Event for setter updates.
+
+### PubliclyImmutableObserver
+Allows you to take a private MutableObserver and make it public under Observer which is immutable, this prevents others from modifying your object via .Set().
+
+## BiDictionary
+Simple dictionary wrapper that contains a primary and reverse lookup dictionary.</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
-        <FileVersion>1.0.0</FileVersion>
+        <AssemblyVersion>1.1.0</AssemblyVersion>
+        <FileVersion>1.1.0</FileVersion>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.0.1</Version>
+        <Version>1.1.0</Version>
     </PropertyGroup>
 
 </Project>
