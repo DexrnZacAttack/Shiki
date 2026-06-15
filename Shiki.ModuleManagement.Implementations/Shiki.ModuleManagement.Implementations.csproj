@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Company>DexrnZacAttack</Company>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0</FileVersion>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Description>Implementations for Shiki.ModuleManagement</Description>
+        <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki</PackageProjectUrl>
+        <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki</RepositoryUrl>
+        <PackageReleaseNotes>- Initial creation</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <Authors>DexrnZacAttack</Authors>
+        <Copyright>DexrnZacAttack</Copyright>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Shiki.ModuleManagement\Shiki.ModuleManagement.csproj" />
+    </ItemGroup>
+
+</Project>

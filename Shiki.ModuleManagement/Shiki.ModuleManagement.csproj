@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Company>DexrnZacAttack</Company>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0</FileVersion>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Authors>DexrnZacAttack</Authors>
+        <Description>Simple module loader and manager</Description>
+        <Copyright>DexrnZacAttack</Copyright>
+        <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki</PackageProjectUrl>
+        <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki</RepositoryUrl>
+        <PackageReleaseNotes>- Initial creation</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Shiki.Common\Shiki.Common.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Serilog" Version="4.3.1" />
+    </ItemGroup>
+
+</Project>

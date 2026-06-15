@@ -9,32 +9,39 @@
         <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki/</PackageProjectUrl>
         <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
-        <PackageReleaseNotes># Changes
-## Identifier
-Made it so that a path is required to NOT be empty in the creation of an Identifier.
-
-# New Classes
-## Result
-Rust-like Result type, very useful for things such as web requests or serial commands.
-
-## Observable &amp; Friends
-Allows you to create an object that can be observed like an Event for setter updates.
-
-### PubliclyImmutableObserver
-Allows you to take a private MutableObserver and make it public under Observer which is immutable, this prevents others from modifying your object via .Set().
-
-## BiDictionary
-Simple dictionary wrapper that contains a primary and reverse lookup dictionary.</PackageReleaseNotes>
+        <PackageReleaseNotes>- Moved `Shiki.Common.Util.Identifier` to `Shiki.Common.Identity.Identifier`
+- `Shiki.Common.Identity.Identifier` now inherits from `IFactoryConstructable`
+- Added `StringJsonConverter` and `StringTypeConverter` for easy reuse by types that can be converted to and from a single `System.String`
+- Added `IFactoryConstructable` and `IAsyncFactoryConstructable`
+   - Allows for creating an object statically
+   - Useful for defining a contract for creating a type that you only need to know the I(Async)FactoryConstructable params for.
+   - `IAsyncFactoryConstructable`: Also useful for defining a type that you want to be specifically async constructable (ie. a function that does async work before passing the results into a constructor).
+- Added TypedArgsAsyncEventHandler
+   - Same as TypedArgsEventHandler, but allows for async calling.
+- Added TypedAsyncEventHandler
+   - Same as TypedEventHandler, but allows for async calling.</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <AssemblyVersion>1.1.0</AssemblyVersion>
-        <FileVersion>1.1.0</FileVersion>
+        <AssemblyVersion>1.2.0</AssemblyVersion>
+        <FileVersion>1.2.0</FileVersion>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.1.0</Version>
+        <Version>1.2.0</Version>
+        <Authors>DexrnZacAttack</Authors>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+    
     <ItemGroup>
         <ProjectReference Include="..\Shiki.CodeGenerator\Shiki.CodeGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Unidecode.NET" Version="2.2.1" />
     </ItemGroup>
     
 </Project>

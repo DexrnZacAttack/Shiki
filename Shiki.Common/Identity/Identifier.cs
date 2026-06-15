@@ -6,8 +6,10 @@ using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Shiki.Common.Util;
+using Shiki.Common.Util.Serialization;
 
-namespace Shiki.Common.Util;
+namespace Shiki.Common.Identity;
 
 /// <summary>
 /// A simple namespaced path type, used for preventing conflicts in modules, or other data driven instances
@@ -16,10 +18,10 @@ namespace Shiki.Common.Util;
 /// </summary>
 [Serializable]
 [DataContract]
-[JsonConverter(typeof(JsonConverter))]
-[TypeConverter(typeof(TypeConverter))]
+[JsonConverter(typeof(StringJsonConverter<Identifier>))]
+[TypeConverter(typeof(StringTypeConverter<Identifier>))]
 [DebuggerDisplay("{FullPath}")]
-public sealed record Identifier : ISerializable
+public sealed record Identifier : ISerializable, IFactoryConstructable<Identifier, string>
 {
     /// <summary>
     /// Namespace of the Identifier
@@ -43,6 +45,9 @@ public sealed record Identifier : ISerializable
 
     /// <inheritdoc />
     public override string ToString() => FullPath;
+
+    /// <inheritdoc />
+    public static Identifier CreateInstance(string id) => Identifier.FromString(id);
 
     /// <inheritdoc />
     public override int GetHashCode()
@@ -127,6 +132,11 @@ public sealed record Identifier : ISerializable
     {
     }
 
+    public static bool CanParseString(string id)
+    {
+        return id.Split(':', 2).Length > 1;
+    }
+
     /// <summary>
     /// Parses a string into a new Identifier
     /// </summary>
@@ -146,7 +156,7 @@ public sealed record Identifier : ISerializable
 
         throw new ArgumentException("Invalid identifier string");
     }
-
+    
     /// <summary>
     /// Creates a new Identifier with the FullName of T as the Namespace
     /// </summary>
@@ -209,67 +219,6 @@ public sealed record Identifier : ISerializable
     {
         info.AddValue(nameof(Namespace), Namespace, typeof(string));
         info.AddValue(nameof(Path), Path, typeof(ImmutableArray<string>));
-    }
-
-    /// <summary>
-    /// JSON Converter for Identifier
-    /// </summary>
-    public class JsonConverter : JsonConverter<Identifier>
-    {
-        /// <inheritdoc />
-        public override Identifier? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            string? id = reader.GetString();
-            if (id == null)
-            {
-                return null;
-            }
-
-            return FromString(id);
-        }
-
-        /// <inheritdoc />
-        public override void Write(Utf8JsonWriter writer, Identifier value, JsonSerializerOptions options)
-        {
-            writer.WriteStringValue(value.ToString());
-        }
-    }
-
-    /// <summary>
-    /// TypeConverter for Identifier
-    /// </summary>
-    public class TypeConverter : System.ComponentModel.TypeConverter
-    {
-        /// <inheritdoc />
-        public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType) =>
-            sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
-
-        /// <inheritdoc />
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
-        {
-            if (value is string str)
-            {
-                return FromString(str);
-            }
-
-            return base.ConvertFrom(context, culture, value);
-        }
-
-        /// <inheritdoc />
-        public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType) =>
-            destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
-
-        /// <inheritdoc />
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value,
-                                          Type destinationType)
-        {
-            if (destinationType == typeof(string) && value is Identifier id)
-            {
-                return id.ToString();
-            }
-
-            return base.ConvertTo(context, culture, value, destinationType);
-        }
     }
 #endregion
 }
