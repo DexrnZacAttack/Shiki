@@ -12,23 +12,20 @@
         <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki</PackageProjectUrl>
         <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki</RepositoryUrl>
-        <PackageReleaseNotes>- Added codegen for `TypedArgsEventHandler`
-- Added codegen for `TypedArgsAsyncEventHandler`
-- Added codegen for `IFactoryConstructable`
-- Added codegen for `IAsyncFactoryConstructable`</PackageReleaseNotes>
+        <PackageReleaseNotes>- Added TypedArgsAsyncEventHandlerGenerator</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <AssemblyVersion>1.0.1</AssemblyVersion>
-        <FileVersion>1.0.1</FileVersion>
+        <AssemblyVersion>1.0.2</AssemblyVersion>
+        <FileVersion>1.0.2</FileVersion>
         
         <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
         <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
         <Authors>DexrnZacAttack</Authors>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Humanizer.Core" Version="3.0.10" GeneratePathProperty="true" PrivateAssets="all" />
-      <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
+        <PackageReference Include="Humanizer.Core" Version="3.0.10" GeneratePathProperty="true" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
