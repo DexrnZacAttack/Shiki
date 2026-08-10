@@ -5,8 +5,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Shiki.CodeGenerator.Generator.Event;
 
-//TODO should remove?
-
 [Generator]
 public class TypedArgsAsyncEventHandlerGenerator : IIncrementalGenerator
 {

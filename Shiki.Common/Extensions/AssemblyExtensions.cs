@@ -13,7 +13,13 @@ public static class AssemblyExtensions
         /// <summary>
         /// Version string of the assembly
         /// </summary>
-        public string VersionString =>
-            FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion ?? string.Empty;
+        public string? VersionString =>
+            FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion;
+        
+        /// <summary>
+        /// Version of the assembly
+        /// </summary>
+        public Version? Version =>
+            assembly.GetName().Version;
     }
 }

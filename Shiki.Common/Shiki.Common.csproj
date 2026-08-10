@@ -9,31 +9,66 @@
         <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki/</PackageProjectUrl>
         <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
-        <PackageReleaseNotes>- Moved `Shiki.Common.Util.Identifier` to `Shiki.Common.Identity.Identifier`
-- `Shiki.Common.Identity.Identifier` now inherits from `IFactoryConstructable`
-- Added `StringJsonConverter` and `StringTypeConverter` for easy reuse by types that can be converted to and from a single `System.String`
-- Added `IFactoryConstructable` and `IAsyncFactoryConstructable`
-   - Allows for creating an object statically
-   - Useful for defining a contract for creating a type that you only need to know the I(Async)FactoryConstructable params for.
-   - `IAsyncFactoryConstructable`: Also useful for defining a type that you want to be specifically async constructable (ie. a function that does async work before passing the results into a constructor).
-- Added TypedArgsAsyncEventHandler
-   - Same as TypedArgsEventHandler, but allows for async calling.
-- Added TypedAsyncEventHandler
-   - Same as TypedEventHandler, but allows for async calling.</PackageReleaseNotes>
+        <PackageReleaseNotes>- Created `BooleanResult`, `ErrorCodeResult`, and Transportable variants of `Result` and `BooleanResult`
+   - `BooleanResult`:
+      - Simple container that may hold an exception, alongside a `BooleanResult.Success` property which is `true` when `BooleanResult.Error` is null.
+   - `ErrorCodeResult`
+      - Somewhat unfinished, but works okay in it's current state.
+      - Simple container that holds a value and an error code, alongside `HasValue` which is true if the value is not null and `ErrorCodeResult.Error` is `default`).
+      - Due to it being a struct, an `UninitializedFallbackError` has been added which is returned when there is no value, but the error code is successful (`default`), I intend on making this better in the future with Unions.
+   - `Transportables`:
+      - Similar to their non-transportable counterparts, but the exception is fixed to a `ResultExceptionDto`, which holds enough exception info to be serialized, deserialized, and then thrown.
+
+- Created `Slug` and `ISlugFormatter`
+   - Slug is a simple read-only string container that enforces the given formatter in it's type param. 
+
+- Created `FactoryConstructableAttribute`
+   - Automatically generates `IFactoryConstructable` implementations for constructors `FactoryConstructableAttribute` is applied onto
+
+- Created `IdentifierNamespace`
+   - Used to define (usually constant) namespaces that can be derived from.
+
+- `Identifier Additions`
+   - Now implements `IResultParsable`, which lets you `TryParseIntoResult`, returning a Result containing either an exception pointing to what went wrong, or the parsed `Identifier`
+   - `Identifier` now generates a hash code on construction for quick hashing
+   - Created factory methods `Identifier.DerivedFrom`, `Identifier.Derived`, `Identifier.WithNamespace`, `Identifier.WithPath`
+
+- Created `RangeObservableCollection`
+   - Used to provide an `AddRange` method, which is not present on a normal `ObservableCollection`.
+
+- Created `PolymorphicSerializableAttribute`
+   - Allows you to mark an individual class as a Polymorphic/Derived type of the given Base class.
+   - An alternative to the existing `JsonDerivedTypeAttribute` built into System.Text.Json which can only be applied to the base class.
+
+- Created `IResultParsable`
+   - Similar to `IParsable`, but instead of returning a bool and an out var, it returns a `Result` which can contain either the value, or an exception.
+   - Being able to provide the exception gives more info on why parsing failed, and in some cases improves the look of the call site.
+
+- Created `Dirtifier`
+   - Provides simple methods to set a value, and if the value is different, set a given bool to true.
+
+- Created `ICachedHashCode`
+   - Interface for implementing a cached hash code, which is useful for fast hashing on immutable objects that are kept around for a long time
+
+- Created `PeriodicRunnerTask`
+   - Calls a given `Task` every tick of a `PeriodicTimer` using the given `TimeSpan`
+
+## Breaking Changes
+- Refactored `Identifier`
+   - `Identifier.FullPath` is now `Identifier.IdentifierString`
+   - Constructor now takes `IReadOnlyCollection&lt;string&gt;` instead of `ICollection&lt;string&gt;`
+   - Removed `Identifier.CanParseString` in favor of new `Identifier.TryParseIntoResult`
+- Removed Observables
+   - There are many other libraries that implement this better than I do, and I don't want to maintain it anymore.
+- Moved `Result` to `Shiki.Common.Result`
+- `AssemblyExtensions.VersionString` is now nullable instead of returning `string.Empty`</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <AssemblyVersion>1.2.0</AssemblyVersion>
-        <FileVersion>1.2.0</FileVersion>
+        <AssemblyVersion>2.0.0</AssemblyVersion>
+        <FileVersion>2.0.0</FileVersion>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <Version>1.2.0</Version>
+        <Version>2.0.0</Version>
         <Authors>DexrnZacAttack</Authors>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <LangVersion>14</LangVersion>
     </PropertyGroup>
     
     <ItemGroup>
@@ -41,7 +76,17 @@
     </ItemGroup>
     
     <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="10.0.9" />
       <PackageReference Include="Unidecode.NET" Version="2.2.1" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Util\Serialization\" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Compile Remove="Result\.ErrorCodeResult_NEW.cs" />
+      <None Include="Result\.ErrorCodeResult_NEW.cs" />
     </ItemGroup>
     
 </Project>

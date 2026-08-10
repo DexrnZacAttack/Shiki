@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace Shiki.Common.Collections;
 
@@ -66,7 +64,7 @@ public class BiDictionary<TKey, TValue>(int capacity)
     }
 
     /// <summary>
-    /// Get & Set indexer for the BiDictionary
+    /// Get and Set indexer for the BiDictionary
     ///
     /// Getter gets from the Primary dictionary, while setter adds to both.
     /// </summary>

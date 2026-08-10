@@ -5,8 +5,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Company>DexrnZacAttack</Company>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
-        <FileVersion>1.0.0</FileVersion>
+        <AssemblyVersion>1.0.1</AssemblyVersion>
+        <FileVersion>1.0.1</FileVersion>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Authors>DexrnZacAttack</Authors>
         <Description>Simple module loader and manager</Description>
@@ -14,8 +14,9 @@
         <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki</PackageProjectUrl>
         <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki</RepositoryUrl>
-        <PackageReleaseNotes>- Initial creation</PackageReleaseNotes>
+        <PackageReleaseNotes>- Bump Serilog version to 4.4.0</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <Version>1.0.1</Version>
     </PropertyGroup>
 
     <ItemGroup>
@@ -23,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Serilog" Version="4.3.1" />
+      <PackageReference Include="Serilog" Version="4.4.0" />
     </ItemGroup>
 
 </Project>

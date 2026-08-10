@@ -12,24 +12,39 @@
         <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki</PackageProjectUrl>
         <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki</RepositoryUrl>
-        <PackageReleaseNotes>- Added TypedArgsAsyncEventHandlerGenerator</PackageReleaseNotes>
+        <PackageReleaseNotes>- Created `FactoryConstructableAttributeImplGenerator`
+   - Automatically generates `IFactoryConstructable` implementations for constructors `FactoryConstructableAttribute` is applied onto
+- Now depends on a new `Shiki.CodeGenerator.Core` project
+- Some refactoring done
+
+## Breaking Changes
+- Removed `PubliclyImmutableObservableGenerator`
+- Moved `IFactoryConstructableGenerator` to `Shiki.CodeGenerator.Generator.Factory`</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <AssemblyVersion>1.0.2</AssemblyVersion>
-        <FileVersion>1.0.2</FileVersion>
+        <AssemblyVersion>1.1.0</AssemblyVersion>
+        <FileVersion>1.1.0</FileVersion>
         
         <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
         <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
-        <Version>1.0.2</Version>
+        <Version>1.1.0</Version>
         <Authors>DexrnZacAttack</Authors>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Humanizer.Core" Version="3.0.10" GeneratePathProperty="true" PrivateAssets="all" />
-        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="5.6.0">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" PrivateAssets="all" />
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.6.0" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Generator\Factory\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Shiki.CodeGenerator.Core\Shiki.CodeGenerator.Core.csproj" />
     </ItemGroup>
 
     <!-- https://github.com/dotnet/roslyn/issues/52017 -->
@@ -38,8 +53,13 @@
     </PropertyGroup>
 
     <Target Name="GetDependencyTargetPaths">
+        <MSBuild Projects="..\Shiki.CodeGenerator.Core\Shiki.CodeGenerator.Core.csproj" Targets="GetTargetPath">
+            <Output TaskParameter="TargetOutputs" ItemName="ShikiOutput" />
+        </MSBuild>
+        
         <ItemGroup>
             <TargetPathWithTargetPlatformMoniker Include="$(PKGHumanizer_Core)\lib\netstandard2.0\Humanizer.dll" IncludeRuntimeDependency="false" />
+            <TargetPathWithTargetPlatformMoniker Include="@(ShikiOutput)" IncludeRuntimeDependency="false" />
         </ItemGroup>
     </Target>
 

@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <Description>Common types which may be useful to other CodeGenerators</Description>
+        <Authors>DexrnZacAttack</Authors>
+        <Copyright>DexrnZacAttack</Copyright>
+        <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki/</PackageProjectUrl>
+        <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0</FileVersion>
+        <Version>1.0.0</Version>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageReleaseNotes>- Initial Creation
+            - Used for common types which may be useful to other CodeGenerators
+        </PackageReleaseNotes>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.CodeAnalysis" />
+      <Reference Include="Microsoft.CodeAnalysis.CSharp" />
+      <Reference Include="System.Collections.Immutable" />
+      <Reference Include="System.Memory" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="5.6.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="5.6.0" />
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.6.0" />
+      <PackageReference Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
+      <PackageReference Include="System.Buffers" Version="4.6.1" />
+      <PackageReference Include="System.Collections.Immutable" Version="10.0.9" />
+      <PackageReference Include="System.Memory" Version="4.6.3" />
+      <PackageReference Include="System.Numerics.Vectors" Version="4.6.1" />
+      <PackageReference Include="System.Reflection.Metadata" Version="10.0.9" />
+      <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
+      <PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.9" />
+      <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
+    </ItemGroup>
+
+</Project>
