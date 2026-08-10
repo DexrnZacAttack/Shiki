@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiki.Common", "Shiki.Commo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiki.CodeGenerator", "Shiki.CodeGenerator\Shiki.CodeGenerator.csproj", "{4B6E0252-E544-41EC-A349-37C65D499431}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiki.Internationalization", "Shiki.Internationalization\Shiki.Internationalization.csproj", "{1EAE0102-FB6C-4365-8A70-8AA1E3F62C02}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiki.ModuleManagement", "Shiki.ModuleManagement\Shiki.ModuleManagement.csproj", "{76953F1D-B3CB-49C2-989F-3FE76C96AB92}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiki.ModuleManagement.Implementations", "Shiki.ModuleManagement.Implementations\Shiki.ModuleManagement.Implementations.csproj", "{AC2D9C1D-8AF6-4E33-9278-19505FF850B1}"
@@ -24,10 +22,6 @@ Global
 		{BD66BEBF-55C2-4467-9547-64C68638BEA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD66BEBF-55C2-4467-9547-64C68638BEA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD66BEBF-55C2-4467-9547-64C68638BEA2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1EAE0102-FB6C-4365-8A70-8AA1E3F62C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1EAE0102-FB6C-4365-8A70-8AA1E3F62C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1EAE0102-FB6C-4365-8A70-8AA1E3F62C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1EAE0102-FB6C-4365-8A70-8AA1E3F62C02}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76953F1D-B3CB-49C2-989F-3FE76C96AB92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76953F1D-B3CB-49C2-989F-3FE76C96AB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76953F1D-B3CB-49C2-989F-3FE76C96AB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
