@@ -34,10 +34,13 @@ public class RangeObservableCollection<T> : ObservableCollection<T>
     {
         ArgumentNullException.ThrowIfNull(enumerable);
 
+        var added = enumerable.ToList();
+        if (added.Count == 0) return;
+
         _skipCollectionChanged = true;
         try
         {
-            foreach (T t in enumerable)
+            foreach (T t in added)
             {
                 Add(t);
             }
@@ -45,7 +48,7 @@ public class RangeObservableCollection<T> : ObservableCollection<T>
         finally
         {
             _skipCollectionChanged = false;
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, added));
         }
     }
 }

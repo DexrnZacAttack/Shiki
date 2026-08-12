@@ -51,7 +51,7 @@ public readonly partial struct IdentifierNamespace : ISerializable, IEquatable<I
     /// </summary>
     /// <param name="nmsp">The IdentifierNamespace</param>
     /// <returns>The IdentifierNamespace's value</returns>
-    public static implicit operator string(IdentifierNamespace nmsp) => nmsp.Namespace;
+    public static explicit operator string(IdentifierNamespace nmsp) => nmsp.Namespace;
     
     /// <inheritdoc/>
     public bool Equals(IdentifierNamespace other) => Namespace == other.Namespace;

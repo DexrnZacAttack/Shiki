@@ -6,69 +6,29 @@
         <Nullable>enable</Nullable>
         <Description>C# commons lib for stuff I copy around or overengineer</Description>
         <Copyright>DexrnZacAttack</Copyright>
+        <Company>DexrnZacAttack</Company>
+        <Authors>DexrnZacAttack</Authors>
         <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki/</PackageProjectUrl>
         <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
-        <PackageReleaseNotes>- Created `BooleanResult`, `ErrorCodeResult`, and Transportable variants of `Result` and `BooleanResult`
-   - `BooleanResult`:
-      - Simple container that may hold an exception, alongside a `BooleanResult.Success` property which is `true` when `BooleanResult.Error` is null.
-   - `ErrorCodeResult`
-      - Somewhat unfinished, but works okay in it's current state.
-      - Simple container that holds a value and an error code, alongside `HasValue` which is true if the value is not null and `ErrorCodeResult.Error` is `default`).
-      - Due to it being a struct, an `UninitializedFallbackError` has been added which is returned when there is no value, but the error code is successful (`default`), I intend on making this better in the future with Unions.
-   - `Transportables`:
-      - Similar to their non-transportable counterparts, but the exception is fixed to a `ResultExceptionDto`, which holds enough exception info to be serialized, deserialized, and then thrown.
-
-- Created `Slug` and `ISlugFormatter`
-   - Slug is a simple read-only string container that enforces the given formatter in it's type param. 
-
-- Created `FactoryConstructableAttribute`
-   - Automatically generates `IFactoryConstructable` implementations for constructors `FactoryConstructableAttribute` is applied onto
-
-- Created `IdentifierNamespace`
-   - Used to define (usually constant) namespaces that can be derived from.
-
-- `Identifier Additions`
-   - Now implements `IResultParsable`, which lets you `TryParseIntoResult`, returning a Result containing either an exception pointing to what went wrong, or the parsed `Identifier`
-   - `Identifier` now generates a hash code on construction for quick hashing
-   - Created factory methods `Identifier.DerivedFrom`, `Identifier.Derived`, `Identifier.WithNamespace`, `Identifier.WithPath`
-
-- Created `RangeObservableCollection`
-   - Used to provide an `AddRange` method, which is not present on a normal `ObservableCollection`.
-
-- Created `PolymorphicSerializableAttribute`
-   - Allows you to mark an individual class as a Polymorphic/Derived type of the given Base class.
-   - An alternative to the existing `JsonDerivedTypeAttribute` built into System.Text.Json which can only be applied to the base class.
-
-- Created `IResultParsable`
-   - Similar to `IParsable`, but instead of returning a bool and an out var, it returns a `Result` which can contain either the value, or an exception.
-   - Being able to provide the exception gives more info on why parsing failed, and in some cases improves the look of the call site.
-
-- Created `Dirtifier`
-   - Provides simple methods to set a value, and if the value is different, set a given bool to true.
-
-- Created `ICachedHashCode`
-   - Interface for implementing a cached hash code, which is useful for fast hashing on immutable objects that are kept around for a long time
-
-- Created `PeriodicRunnerTask`
-   - Calls a given `Task` every tick of a `PeriodicTimer` using the given `TimeSpan`
-
-## Breaking Changes
-- Refactored `Identifier`
-   - `Identifier.FullPath` is now `Identifier.IdentifierString`
-   - Constructor now takes `IReadOnlyCollection&lt;string&gt;` instead of `ICollection&lt;string&gt;`
-   - Removed `Identifier.CanParseString` in favor of new `Identifier.TryParseIntoResult`
-- Removed Observables
-   - There are many other libraries that implement this better than I do, and I don't want to maintain it anymore.
-- Moved `Result` to `Shiki.Common.Result`
-- `AssemblyExtensions.VersionString` is now nullable instead of returning `string.Empty`</PackageReleaseNotes>
+        <AssemblyVersion>2.1.0</AssemblyVersion>
+        <FileVersion>2.1.0</FileVersion>
+        <Version>2.1.0</Version>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <AssemblyVersion>2.0.0</AssemblyVersion>
-        <FileVersion>2.0.0</FileVersion>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <Version>2.0.0</Version>
-        <Authors>DexrnZacAttack</Authors>
         <LangVersion>14</LangVersion>
+
+        <PackageReleaseNotes>### `Identifier`
+- Removed accidental leftover debug line in the constructor
+- Created `Identifier(string, ImmutableArray&lt;string&gt;)` constructor
+   - Other constructors now call to this one, in addition to reusing `ImmutableArray&lt;string&gt;.Empty` if an empty path is passed.
+
+### RangeObservableCollection
+- Now calls OnCollectionChanged with `NotifyCollectionChangedAction.Add` w/ new items, instead of `NotifyCollectionChangedAction.Reset`.
+
+            ## Breaking Changes
+### IdentifierNamespace
+- `operator string` is now `explicit`</PackageReleaseNotes>
     </PropertyGroup>
     
     <ItemGroup>

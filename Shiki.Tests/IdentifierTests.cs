@@ -1,5 +1,10 @@
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Jobs;
+using BenchmarkDotNet.Running;
 using Shiki.Common.Identity;
 using Shiki.Common.Result;
+using Shiki.Tests.Benchmark;
 using Shiki.Tests.Util;
 using Shiki.Tests.Util.Extensions;
 
@@ -42,5 +47,4 @@ public class IdentifierTests
 
         Assert.That(i, Is.EqualTo(id), "with syntax does work");
     }
-
 }

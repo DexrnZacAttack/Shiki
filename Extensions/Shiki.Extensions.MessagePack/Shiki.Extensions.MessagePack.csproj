@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Description>Shiki extensions and formatters for MessagePack</Description>
+        <Copyright>DexrnZacAttack</Copyright>
+        <Company>DexrnZacAttack</Company>
+        <Authors>DexrnZacAttack</Authors>
+        <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki/</PackageProjectUrl>
+        <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0</FileVersion>
+        <Version>1.0.0</Version>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageReleaseNotes>- Initial creation
+- Created formatters for `TransportableBooleanResult`, `ResultExceptionDto`, `Identifier`, and `Slug`.</PackageReleaseNotes>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MessagePack" Version="3.1.8" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shiki.Common\Shiki.Common.csproj" />
+    </ItemGroup>
+
+</Project>

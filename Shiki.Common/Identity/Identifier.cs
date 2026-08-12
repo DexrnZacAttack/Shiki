@@ -55,7 +55,7 @@ public sealed partial record Identifier :
     /// <param name="nmsp">The namespace of the Identifier</param>
     /// <param name="path">The path of the Identifier</param>
     [FactoryConstructable]
-    public Identifier(string nmsp, params IReadOnlyCollection<string> path)
+    public Identifier(string nmsp, ImmutableArray<string> path)
     {
         Namespace = nmsp.Replace(":", "");
         Path = [.. path];
@@ -67,8 +67,16 @@ public sealed partial record Identifier :
         this.IdentifierString = $"{Namespace}:{PathString}";
 
         this.HashCode = GenerateHashCode();
-        
-        Console.WriteLine(this.ToString());
+    }
+    
+    /// <summary>
+    /// Creates a new Identifier
+    /// </summary>
+    /// <param name="nmsp">The namespace of the Identifier</param>
+    /// <param name="path">The path of the Identifier</param>
+    [FactoryConstructable]
+    public Identifier(string nmsp, params IReadOnlyCollection<string> path) : this(nmsp, path.Count == 0 ? ImmutableArray<string>.Empty : [.. path])
+    {
     }
 
     /// <summary>
@@ -77,7 +85,7 @@ public sealed partial record Identifier :
     /// <param name="nmsp">The namespace of the Identifier</param>
     /// <param name="path">The path of the Identifier</param>
     [FactoryConstructable]
-    public Identifier(string nmsp, string[] path) : this(nmsp, path.ToImmutableArray())
+    public Identifier(string nmsp, string[] path) : this(nmsp, path.Length == 0 ? ImmutableArray<string>.Empty : [.. path])
     {
     }
 
