@@ -4,10 +4,9 @@ using Shiki.Common.Identity.Slug;
 
 namespace Shiki.Extensions.MessagePack.Formatter.Identity.Slug;
 
-//todo do I still need it
-public sealed class SlugFormatterResolver : IFormatterResolver
+public sealed class SlugMessagePackFormatterResolver : IFormatterResolver
 {
-    public static readonly SlugFormatterResolver Instance = new();
+    public static readonly SlugMessagePackFormatterResolver Instance = new();
 
     public IMessagePackFormatter<T>? GetFormatter<T>() => Cache<T>.Formatter;
 
@@ -20,7 +19,7 @@ public sealed class SlugFormatterResolver : IFormatterResolver
             Type type = typeof(T);
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Slug<>))
             {
-                Type formatterType = typeof(SlugFormatter<>).MakeGenericType(type.GetGenericArguments());
+                Type formatterType = typeof(SlugMessagePackFormatter<>).MakeGenericType(type.GetGenericArguments());
                 Formatter = (IMessagePackFormatter<T>?)Activator.CreateInstance(formatterType);
             }
         }

@@ -4,12 +4,12 @@ using Shiki.Common.Result.Serialization.Types;
 
 namespace Shiki.Extensions.MessagePack.Formatter.Result;
 
-public class ResultExceptionDtoFormatter : IMessagePackFormatter<ResultExceptionDto?>
+public class ResultExceptionDtoMessagePackFormatter : IMessagePackFormatter<ResultExceptionDto?>
 {
     private const int MAX_DEPTH = 10;
     private const int ARRAY_CT = 3;
     
-    public static readonly ResultExceptionDtoFormatter Instance = new();
+    public static readonly ResultExceptionDtoMessagePackFormatter Instance = new();
     
     public void Serialize(ref MessagePackWriter writer, ResultExceptionDto? value, MessagePackSerializerOptions options)
     {

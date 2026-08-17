@@ -4,7 +4,7 @@ using Shiki.Common.Result;
 
 namespace Shiki.Extensions.MessagePack.Formatter.Result;
 
-public class TransportableBooleanResultFormatter : IMessagePackFormatter<TransportableBooleanResult>
+public class TransportableBooleanResultMessagePackFormatter : IMessagePackFormatter<TransportableBooleanResult>
 {
     private const int ARRAY_CT = 1;
     
@@ -24,7 +24,7 @@ public class TransportableBooleanResultFormatter : IMessagePackFormatter<Transpo
         }
         else
         {
-            ResultExceptionDtoFormatter.Instance.Serialize(ref writer, value.Error, options);
+            ResultExceptionDtoMessagePackFormatter.Instance.Serialize(ref writer, value.Error, options);
         }
     }
 
@@ -45,7 +45,7 @@ public class TransportableBooleanResultFormatter : IMessagePackFormatter<Transpo
 
         TransportableBooleanResult res = reader.TryReadNil() 
                                              ? new TransportableBooleanResult()
-                                             : new TransportableBooleanResult(ResultExceptionDtoFormatter.Instance.Deserialize(ref reader, options));
+                                             : new TransportableBooleanResult(ResultExceptionDtoMessagePackFormatter.Instance.Deserialize(ref reader, options));
         
         
         for (int ect = ARRAY_CT; ect < c; ect++)

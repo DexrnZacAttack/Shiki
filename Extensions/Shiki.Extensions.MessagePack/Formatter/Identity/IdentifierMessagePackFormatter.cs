@@ -4,7 +4,7 @@ using Shiki.Common.Identity;
 
 namespace Shiki.Extensions.MessagePack.Formatter.Identity;
 
-public class IdentifierFormatter : IMessagePackFormatter<Identifier?>
+public class IdentifierMessagePackFormatter : IMessagePackFormatter<Identifier?>
 {
     private const int IdentifierPropertyCount = 2;
     
