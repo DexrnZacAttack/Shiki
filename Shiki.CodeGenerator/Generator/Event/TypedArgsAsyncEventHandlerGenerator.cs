@@ -10,12 +10,19 @@ public class TypedArgsAsyncEventHandlerGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        context.RegisterPostInitializationOutput(ctx =>
+        context.RegisterSourceOutput(context.CompilationProvider, (ctx, comp) =>
         {
+            INamedTypeSymbol t = comp.GetTypeByMetadataName("Shiki.Common.Factory.FactoryConstructableAttribute");
+            if (t != null && !SymbolEqualityComparer.Default.Equals(t.ContainingAssembly, comp.Assembly))
+            {
+                return;
+            }
+            
             StringBuilder sb = new();
             
             sb.AppendLine("//GENERATED"                 )
-              .AppendLine(                              ) 
+              .AppendLine(                              )
+              .AppendLine("using System.Threading.Tasks;")
               .AppendLine("namespace Shiki.Common.Event;")
               .AppendLine(                              );
 

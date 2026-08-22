@@ -10,8 +10,14 @@ public class TypedArgsEventHandlerGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        context.RegisterPostInitializationOutput(ctx =>
+        context.RegisterSourceOutput(context.CompilationProvider, (ctx, comp) =>
         {
+            INamedTypeSymbol t = comp.GetTypeByMetadataName("Shiki.Common.Factory.FactoryConstructableAttribute");
+            if (t != null && !SymbolEqualityComparer.Default.Equals(t.ContainingAssembly, comp.Assembly))
+            {
+                return;
+            }
+            
             StringBuilder sb = new();
             
             sb.AppendLine("//GENERATED"                 )
