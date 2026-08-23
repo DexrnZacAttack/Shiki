@@ -11,24 +11,14 @@
         <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki/</PackageProjectUrl>
         <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
-        <AssemblyVersion>2.1.0</AssemblyVersion>
-        <FileVersion>2.1.0</FileVersion>
-        <Version>2.1.0</Version>
+        <AssemblyVersion>2.1.1</AssemblyVersion>
+        <FileVersion>2.1.1</FileVersion>
+        <Version>2.1.1</Version>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <LangVersion>14</LangVersion>
 
-        <PackageReleaseNotes>### `Identifier`
-- Removed accidental leftover debug line in the constructor
-- Created `Identifier(string, ImmutableArray&lt;string&gt;)` constructor
-   - Other constructors now call to this one, in addition to reusing `ImmutableArray&lt;string&gt;.Empty` if an empty path is passed.
-
-### RangeObservableCollection
-- Now calls OnCollectionChanged with `NotifyCollectionChangedAction.Add` w/ new items, instead of `NotifyCollectionChangedAction.Reset`.
-
-            ## Breaking Changes
-### IdentifierNamespace
-- `operator string` is now `explicit`</PackageReleaseNotes>
+        <PackageReleaseNotes>- Added AssemblyExtensions.InformationalVersionString</PackageReleaseNotes>
     </PropertyGroup>
     
     <ItemGroup>

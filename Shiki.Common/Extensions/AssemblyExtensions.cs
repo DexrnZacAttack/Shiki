@@ -17,6 +17,12 @@ public static class AssemblyExtensions
             FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion;
         
         /// <summary>
+        /// Version string of the assembly
+        /// </summary>
+        public string? InformationalVersionString =>
+            assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+        
+        /// <summary>
         /// Version of the assembly
         /// </summary>
         public Version? Version =>
