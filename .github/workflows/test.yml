@@ -1,0 +1,18 @@
+name: Shiki Tests
+
+on:
+    push:
+    pull_request:
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            #https://github.com/marketplace/actions/dotnet-tests-report
+            -   name: Run Tests
+                uses: zyborg/dotnet-tests-report@v1
+                with:
+                    project_path: src/Tests/Shiki.Tests
+                    report_name: shiki_tests
+                    report_title: Shiki.Tests
+                    github_token: ${{ secrets.GITHUB_TOKEN }}

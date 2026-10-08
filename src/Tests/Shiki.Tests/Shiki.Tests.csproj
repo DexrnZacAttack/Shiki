@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <Description>Used to test library implementations</Description>
+    <Authors>DexrnZacAttack</Authors>
+    <Copyright>DexrnZacAttack</Copyright>
+    <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki/</PackageProjectUrl>
+    <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
+    <AssemblyVersion>1.2.0</AssemblyVersion>
+    <FileVersion>1.2.0</FileVersion>
+    <Version>1.2.0</Version>
+    <PackageReleaseNotes>- Added tests for `Result` conversion, Shiki.TaskPipeline, and Shiki.FileSystem.Implementations.Assembly.
+- Benchmarks moved to own project</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="NUnit" />
+    <PackageReference Include="NUnit.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NUnit3TestAdapter" />
+    <PackageReference Include="R3" />
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="NUnit.Framework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FileSystem\Shiki.FileSystem.Abstractions\Shiki.FileSystem.Abstractions.csproj" />
+    <ProjectReference Include="..\..\FileSystem\Shiki.FileSystem.Implementations.Assembly\Shiki.FileSystem.Implementations.Assembly.csproj" />
+    <ProjectReference Include="..\..\Shiki.Common\Shiki.Common.csproj" />
+    <ProjectReference Include="..\..\Shiki.TaskPipeline\Shiki.TaskPipeline.csproj" />
+  </ItemGroup>
+    
+    <ItemGroup>
+        <EmbeddedResource Include="Embedded/**/*" />
+    </ItemGroup>
+</Project>

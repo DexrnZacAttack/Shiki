@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Description>C# commons lib for stuff I copy around or overengineer</Description>
+    <Copyright>DexrnZacAttack</Copyright>
+    <Company>DexrnZacAttack</Company>
+    <Authors>DexrnZacAttack</Authors>
+    <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki/</PackageProjectUrl>
+    <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
+    <AssemblyVersion>2.2.0</AssemblyVersion>
+    <FileVersion>2.2.0</FileVersion>
+    <Version>2.2.0</Version>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReleaseNotes>- Created `ExceptionExtensions`
+  - Just a helper inside that sets the current stacktrace
+- `Slug&lt;TFormatter&gt;` now implements `IComparable&lt;Slug&lt;TFormatter&gt;&gt;` and `IComparable`
+- Created `IResultState`, a common class between all Result types
+- Implemented conversion operators and helper methods for conversion between Result types
+  - For most Result types, you can now directly return either an exception or the success value without a wrapper ctor call.
+- Added `BooleanResult.Successful` and `TransportableBooleanResult.Successful` to avoid an extra ctor call
+
+- Created `TypeRegistry`
+  - Acts mostly like a cache for types, fetching new types on read
+  - The registry part comes from the fact that you need a validator to 'register' types
+    - This validator gets all the needed metadata and verifies that the type can be used in a given `TypeRegistry`
+- Created `GlobalTypeRegistry`
+  - Like `TypeRegistry`, but does the actual caching.
+- Created `ITypeRegistryValidator`
+  - Intended to take a type and verify that it can be used in a `TypeRegistry` with this validator
+  - Also gets the key for the type
+- Created `SingletonTypeRegistry`
+  - A lazy singleton `TypeRegistry`
+
+- Fixed `Dirtifier.Set`
+- Created IProvider
+  - Simple interfaces for providing an object with the given args and verification
+- Created ISingleton
+  - Simple interface for defining a singleton instance
+
+### Breaking Changes
+- Removed BiDictionary
+  - Another BiDictionary implementation already exists on NuGet, it's not worth trying to upkeep this.
+
+- Due to the new `IResultState`, all result classes has `Success` renamed to `IsSuccessful`
+- Due to the new `IResultState`, `IBooleanResult` was removed</PackageReleaseNotes>
+  </PropertyGroup>
+    
+  <ItemGroup>
+    <ProjectReference Include="..\CodeGenerator\Shiki.CodeGenerator\Shiki.CodeGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="BidirectionalDictionary" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" />
+    <PackageReference Include="Unidecode.NET" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Util\Serialization\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Result\.ErrorCodeResult_NEW.cs" />
+    <None Include="Result\.ErrorCodeResult_NEW.cs" />
+  </ItemGroup>
+</Project>

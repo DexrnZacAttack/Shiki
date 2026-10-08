@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+      <Description>Localization library</Description>
+      <Copyright>DexrnZacAttack</Copyright>
+      <Company>DexrnZacAttack</Company>
+      <Authors>DexrnZacAttack</Authors>
+      <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki/</PackageProjectUrl>
+      <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
+      <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
+      <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
+      <AssemblyVersion>0.0.1</AssemblyVersion>
+      <FileVersion>0.0.1</FileVersion>
+      <Version>0.0.1</Version>
+      <PackageReleaseNotes>- Initial creation
+- Translations via layered language strings
+  - Still missing polish, but usable enough for my tasks.</PackageReleaseNotes>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileSystem\Shiki.FileSystem\Shiki.FileSystem.csproj" />
+    <ProjectReference Include="..\Shiki.Common\Shiki.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ObservableCollections" />
+    <PackageReference Include="ObservableCollections.R3" />
+    <PackageReference Include="R3" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SmartFormat" />
+  </ItemGroup>
+</Project>

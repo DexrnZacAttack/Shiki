@@ -1,0 +1,30 @@
+<Solution>
+    <Folder Name="/Tests/">
+        <Project Path="src/Tests/Shiki.Tests/Shiki.Tests.csproj" />
+        <Project Path="src/Tests/Shiki.Benchmarks/Shiki.Benchmarks.csproj" />
+    </Folder>
+    
+    <Project Path="src/Shiki.Common/Shiki.Common.csproj" />
+    <Project Path="src/Shiki.TaskPipeline/Shiki.TaskPipeline.csproj" />
+    <Project Path="src/Shiki.Internationalization/Shiki.Internationalization.csproj" />
+
+    <Folder Name="/Extensions/">
+        <Project Path="src/Extensions/Shiki.Extensions.MessagePack/Shiki.Extensions.MessagePack.csproj" />
+        <Project Path="src/Extensions/Shiki.Extensions.OneOf/Shiki.Extensions.OneOf.csproj" />
+    </Folder>
+    <Folder Name="/FileSystem/">
+        <Project Path="src/FileSystem/Shiki.FileSystem/Shiki.FileSystem.csproj" />
+        <Project Path="src/FileSystem/Shiki.FileSystem.Abstractions/Shiki.FileSystem.Abstractions.csproj" />
+        <Project Path="src/FileSystem/Shiki.FileSystem.Implementations.Assembly/Shiki.FileSystem.Implementations.Assembly.csproj" />
+        <Project Path="src/FileSystem/Shiki.FileSystem.Implementations.Native/Shiki.FileSystem.Implementations.Native.csproj" />
+        <Project Path="src/FileSystem/Shiki.FileSystem.Implementations.Web/Shiki.FileSystem.Implementations.Web.csproj" />
+    </Folder>
+    <Folder Name="/ModuleManagement/">
+        <Project Path="src/ModuleManagement/Shiki.ModuleManagement.Implementations/Shiki.ModuleManagement.Implementations.csproj" />
+        <Project Path="src/ModuleManagement/Shiki.ModuleManagement/Shiki.ModuleManagement.csproj" />
+    </Folder>
+    <Folder Name="/CodeGenerator/">
+        <Project Path="src/CodeGenerator/Shiki.CodeGenerator.Core/Shiki.CodeGenerator.Core.csproj" />
+        <Project Path="src/CodeGenerator/Shiki.CodeGenerator/Shiki.CodeGenerator.csproj" />
+    </Folder>
+</Solution>

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Description>Abstractions for filesystem operations</Description>
+        <Copyright>DexrnZacAttack</Copyright>
+        <Company>DexrnZacAttack</Company>
+        <Authors>DexrnZacAttack</Authors>
+        <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki/</PackageProjectUrl>
+        <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0</FileVersion>
+        <Version>1.0.0</Version>
+        <PackageReleaseNotes>- Initial creation
+- Basic abstractions for filesystem operations, mostly incomplete but usable for most common tasks as of now.
+- Adds abstractions for directory, file, and generic filesystem node management.
+</PackageReleaseNotes>
+
+    </PropertyGroup>
+
+</Project>

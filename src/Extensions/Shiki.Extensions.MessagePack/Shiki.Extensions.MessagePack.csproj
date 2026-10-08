@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Description>Shiki extensions and formatters for MessagePack</Description>
+        <Copyright>DexrnZacAttack</Copyright>
+        <Company>DexrnZacAttack</Company>
+        <Authors>DexrnZacAttack</Authors>
+        <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki/</PackageProjectUrl>
+        <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <AssemblyVersion>1.2.0</AssemblyVersion>
+        <FileVersion>1.2.0</FileVersion>
+        <Version>1.2.0</Version>
+        <PackageReleaseNotes>- Added extensions for internationalization, and polymorphic serialization of types with `PolymorphicSerializableAttribute`
+            - Updated the serde in `TransportableBooleanResultMessagePackFormatter` to better fit the type
+
+            ### Breaking Changes
+            - Refactored most of `IdentifierMessagePackFormatter`
+        </PackageReleaseNotes>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MessagePack"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Shiki.Common\Shiki.Common.csproj"/>
+        <ProjectReference Include="..\..\Shiki.Internationalization\Shiki.Internationalization.csproj"/>
+    </ItemGroup>
+</Project>

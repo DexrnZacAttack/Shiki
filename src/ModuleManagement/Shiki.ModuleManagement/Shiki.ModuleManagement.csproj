@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Company>DexrnZacAttack</Company>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Authors>DexrnZacAttack</Authors>
+    <Description>Simple module loader and manager</Description>
+    <Copyright>DexrnZacAttack</Copyright>
+    <PackageProjectUrl>https://git.dexrn.me/Dexrn/Shiki</PackageProjectUrl>
+    <PackageLicenseUrl>https://git.dexrn.me/Dexrn/Shiki/src/branch/main/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki</RepositoryUrl>
+    <PackageReleaseNotes>Basically entirely overhauled.
+
+- Created `IInitializableModule`, `IAsyncInitializableModule`
+- Created ModuleInstantiator
+  - internal, also useless for the most part but still exists anyway
+- Created `ModuleStorageBuilder`
+  - The intended way to construct a `ModuleStorage` with pre-set modules instances and sources.
+- `ModuleStorage` is now much more fleshed out with methods to remove modules, add modules, dispose, etc
+  - `ModuleStorage` now has many overloads for adding existing loaded modules of many types
+
+## Breaking Changes
+- **Overhauled**
+- `IModule` is no longer initializable, instead initializable modules should implement `IInitializableModule` or `IAsyncInitializableModule`
+- Large refactors to `ModuleStorage` break it's API completely for existing users.</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>2.0.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shiki.Common\Shiki.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="OneOf" />
+    <PackageReference Include="Serilog" />
+  </ItemGroup>
+</Project>
