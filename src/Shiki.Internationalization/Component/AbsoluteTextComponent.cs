@@ -1,6 +1,7 @@
+using System.Text.Json.Serialization;
 using Shiki.Common.Serialization.Polymorphism;
 
 namespace Shiki.Internationalization.Component;
 
-[PolymorphicSerializable<AbsoluteTextComponent, ITextComponent>]
-public record AbsoluteTextComponent(string Value) : ITextComponent;
+[PolymorphicSerializable<ITextComponent>("absolute")]
+public record AbsoluteTextComponent([property: JsonPropertyName("value")] string Value) : ITextComponent;

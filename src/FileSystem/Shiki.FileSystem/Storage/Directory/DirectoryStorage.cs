@@ -11,7 +11,7 @@ public class DirectoryStorage<TValue>(string directory, IPlatformDirectoryManage
 {
     public delegate string ValueToNameResolver(TValue value);
 
-    public async Task<BatchActionResult<List<TValue>, string>> LoadAsync()
+    public async Task<BatchActionResult<List<TValue>, string>> LoadAsync(CancellationToken ct = default)
     {
         if (!await directoryManager.ExistsAsync(Directory))
         {
@@ -28,17 +28,20 @@ public class DirectoryStorage<TValue>(string directory, IPlatformDirectoryManage
         List<ActionError<string>> errors = [];
         
         List<TValue> d = [];
-        await foreach (string file in directoryManager.EnumerateAsync(Directory, serializer.FileExtensionGlob, IPlatformDirectoryManager.DirectoryEnumerationType.Files))
+        await foreach (string file in directoryManager.EnumerateAsync(Directory, serializer.FileExtensionGlob, IPlatformDirectoryManager.DirectoryEnumerationType.Files, ct))
         {
             try
             {
                 await using Stream fs = await fileManager.GetStreamAsync(file, FileMode.Open, FileAccess.Read, FileShare.Read);
-                TValue? data = await serializer.DeserializeAsync(fs);
+                var res = await serializer.DeserializeAsync(fs, ct);
 
-                if (data != null)
+                if (!res.HasValue)
                 {
-                    d.Add(data);
+                    errors.Add(new ActionError<string>(file, res.Error));
+                    continue;
                 }
+                
+                d.Add(res.Value);
             }
             catch (Exception e)
             {
@@ -49,7 +52,7 @@ public class DirectoryStorage<TValue>(string directory, IPlatformDirectoryManage
         return new BatchActionResult<List<TValue>, string>(d, errors);
     }
 
-    public async Task<List<ActionError<string>>> SaveAsync(List<TValue>? data)
+    public async Task<List<ActionError<string>>> SaveAsync(List<TValue>? data, CancellationToken ct = default)
     {
         if (data is null)
             return [];
@@ -75,7 +78,11 @@ public class DirectoryStorage<TValue>(string directory, IPlatformDirectoryManage
             try
             {
                 await using Stream fs = await fileManager.GetStreamAsync(path, FileMode.Create, FileAccess.Write, FileShare.None);
-                await serializer.SerializeAsync(fs, d);
+                var res = await serializer.SerializeAsync(fs, d, ct);
+                if (!res.IsSuccessful)
+                {
+                    errors.Add(new ActionError<string>(path, res.Error));
+                }
             }
             catch (Exception e)
             {

@@ -7,7 +7,7 @@ namespace Shiki.FileSystem.Storage.Directory.KeyValue;
 public class DirectoryKeyValueStorage<TValue>(string directory, IPlatformDirectoryManager directoryManager, IPlatformFileManager fileManager, IStorageFileSerializer<TValue> serializer)
     : BaseDirectoryStorage(directory), IDirectoryKeyValueStorage<TValue>
 {
-    public async Task<BatchActionResult<Dictionary<string, TValue>, string>> LoadAsync()
+    public async Task<BatchActionResult<Dictionary<string, TValue>, string>> LoadAsync(CancellationToken ct = default)
     {
         if (!await directoryManager.ExistsAsync(Directory))
         {
@@ -24,17 +24,19 @@ public class DirectoryKeyValueStorage<TValue>(string directory, IPlatformDirecto
         List<ActionError<string>> errors = [];
         
         Dictionary<string, TValue> d = [];
-        await foreach (string file in directoryManager.EnumerateAsync(Directory, serializer.FileExtensionGlob, IPlatformDirectoryManager.DirectoryEnumerationType.Files))
+        await foreach (string file in directoryManager.EnumerateAsync(Directory, serializer.FileExtensionGlob, IPlatformDirectoryManager.DirectoryEnumerationType.Files, ct))
         {
             try
             {
                 await using Stream fs = await fileManager.GetStreamAsync(file, FileMode.Open, FileAccess.Read, FileShare.None);
-                TValue? data = await serializer.DeserializeAsync(fs);
-
-                if (data != null)
+                var res = await serializer.DeserializeAsync(fs, ct);
+                if (!res.HasValue)
                 {
-                    d.Add(Path.GetFileNameWithoutExtension(file), data);
+                    errors.Add(new ActionError<string>(file, res.Error));
+                    continue;
                 }
+                
+                d.Add(Path.GetFileNameWithoutExtension(file), res.Value);
             }
             catch (Exception e)
             {
@@ -45,7 +47,7 @@ public class DirectoryKeyValueStorage<TValue>(string directory, IPlatformDirecto
         return new BatchActionResult<Dictionary<string, TValue>, string>(d, errors);
     }
 
-    public async Task<List<ActionError<string>>> SaveAsync(Dictionary<string, TValue>? data)
+    public async Task<List<ActionError<string>>> SaveAsync(Dictionary<string, TValue>? data, CancellationToken ct = default)
     {
         if (data is null)
             return [];
@@ -57,14 +59,18 @@ public class DirectoryKeyValueStorage<TValue>(string directory, IPlatformDirecto
             await directoryManager.CreateDirectoryAsync(Directory);
         }
 
-        foreach (KeyValuePair<string, TValue> d in data)
+        foreach (var d in data)
         {
             string path = Path.Combine(Directory, $"{d.Key}.{serializer.FileExtension}");
 
             try
             {
                 await using Stream fs = await fileManager.GetStreamAsync(path, FileMode.Create, FileAccess.Write, FileShare.None);
-                await serializer.SerializeAsync(fs, d.Value);
+                var res = await serializer.SerializeAsync(fs, d.Value, ct);
+                if (!res.IsSuccessful)
+                {
+                    errors.Add(new ActionError<string>(path, res.Error));
+                }
             }
             catch (Exception e)
             {
@@ -75,7 +81,7 @@ public class DirectoryKeyValueStorage<TValue>(string directory, IPlatformDirecto
         return errors;
     }
     
-    public async Task<List<ActionError<string>>> SaveAsync(string id, TValue data)
+    public async Task<List<ActionError<string>>> SaveAsync(string id, TValue data, CancellationToken ct = default)
     {
         if (data is null)
             return [];
@@ -92,7 +98,7 @@ public class DirectoryKeyValueStorage<TValue>(string directory, IPlatformDirecto
         try
         {
             await using Stream fs = await fileManager.GetStreamAsync(path, FileMode.Create, FileAccess.Write, FileShare.None);
-            await serializer.SerializeAsync(fs, data);
+            await serializer.SerializeAsync(fs, data, ct);
         }
         catch (Exception e)
         {
@@ -102,7 +108,7 @@ public class DirectoryKeyValueStorage<TValue>(string directory, IPlatformDirecto
         return errors;
     }
 
-    public async Task DeleteAsync(string id)
+    public async Task DeleteAsync(string id, CancellationToken ct = default)
     {
         if (!await directoryManager.ExistsAsync(Directory))
             return;

@@ -7,6 +7,11 @@ namespace Shiki.FileSystem.Implementations.Assembly;
 /// </summary>
 public class EmbeddedFileManager(System.Reflection.Assembly assembly) : EmbeddedFileSystemNodeManager(assembly), IPlatformFileManager
 {
+    /// <summary>
+    /// Gets the EmbeddedFileManager for the currently executing assembly
+    /// </summary>
+    public static EmbeddedFileManager OfCurrentlyExecuting { get; } = new(System.Reflection.Assembly.GetExecutingAssembly());
+    
     /// <inheritdoc/>
     public Task CopyAsync(string source, string destination, bool overwrite) =>
         Task.FromException(Constants.CannotModifyException);

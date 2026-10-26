@@ -15,7 +15,6 @@ namespace Shiki.FileSystem.Storage;
 /// <param name="serializer">Data serializer</param>
 /// <typeparam name="T">The type being stored</typeparam>
 public class FileStorage<T>(string? directory, string filename, IPlatformDirectoryManager directoryManager, IPlatformFileManager fileManager, IStorageSerializer<T> serializer) : IStorageWriter<T?, BooleanResult<Exception>>, IStorageReader<Result<T, Exception>>
-where T : class
 {
     /// <summary>
     /// The full filename including serializer dictated extension
@@ -41,7 +40,7 @@ where T : class
     }
 
     /// <inheritdoc/>
-    public async Task<Result<T, Exception>> LoadAsync()
+    public async Task<Result<T, Exception>> LoadAsync(CancellationToken ct = default)
     {
         if (!await fileManager.ExistsAsync(Path))
         {
@@ -49,23 +48,23 @@ where T : class
         }
 
         await using Stream fs = await fileManager.GetStreamAsync(Path, FileMode.Open, FileAccess.Read, FileShare.Read);
-        T? deserialized = await serializer.DeserializeAsync(fs);
+        var res = await serializer.DeserializeAsync(fs, ct);
         
-        if (deserialized is null)
-            return new NullReferenceException("Failed to deserialize");
+        if (!res.HasValue)
+            return res.Error;
 
-        return deserialized;
+        return res.Value;
     }
 
     /// <inheritdoc/>
-    public async Task<BooleanResult<Exception>> SaveAsync(T? data)
+    public async Task<BooleanResult<Exception>> SaveAsync(T? data, CancellationToken ct = default)
     {
         if (data is null)
         {
             return new ArgumentNullException(nameof(data)).WithCurrentStackTrace();
         }
         
-        if (directory != null)
+        if (!string.IsNullOrEmpty(directory))
         {
             try
             {
@@ -81,8 +80,6 @@ where T : class
         }
         
         await using Stream fs = await fileManager.GetStreamAsync(Path, FileMode.Create, FileAccess.Write, FileShare.None);
-        await serializer.SerializeAsync(fs, data);
-
-        return BooleanResult<Exception>.Successful;
+        return await serializer.SerializeAsync(fs, data, ct);
     }
 }

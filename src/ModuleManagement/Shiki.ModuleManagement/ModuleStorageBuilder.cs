@@ -10,7 +10,6 @@ namespace Shiki.ModuleManagement;
 /// <typeparam name="TModule">The base module type</typeparam>
 /// <typeparam name="TArgs">The args that would be provided to each module if initializable</typeparam>
 public class ModuleStorageBuilder<TModule, TArgs>
-    where TArgs : EventArgs
     where TModule : IModule
 {
     private readonly record struct PendingSource(IModuleSource Source, TArgs Args);

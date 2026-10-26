@@ -7,7 +7,7 @@ namespace Shiki.FileSystem.Storage.Directory.KeyValue;
 public class ReadOnlyDirectoryKeyValueStorage<TValue>(string directory, IPlatformDirectoryManager directoryManager, IPlatformFileManager fileManager, IStorageFileSerializer<TValue> serializer)
     : BaseDirectoryStorage(directory), IReadableDirectoryKeyValueStorage<TValue>
 {
-    public async Task<BatchActionResult<Dictionary<string, TValue>, string>> LoadAsync()
+    public async Task<BatchActionResult<Dictionary<string, TValue>, string>> LoadAsync(CancellationToken ct = default)
     {
         if (!await directoryManager.ExistsAsync(Directory))
         {
@@ -17,17 +17,19 @@ public class ReadOnlyDirectoryKeyValueStorage<TValue>(string directory, IPlatfor
         List<ActionError<string>> errors = [];
         
         Dictionary<string, TValue> d = [];
-        await foreach (string file in directoryManager.EnumerateAsync(Directory, serializer.FileExtensionGlob, IPlatformDirectoryManager.DirectoryEnumerationType.Files))
+        await foreach (string file in directoryManager.EnumerateAsync(Directory, serializer.FileExtensionGlob, IPlatformDirectoryManager.DirectoryEnumerationType.Files, ct))
         {
             try
             {
                 await using Stream fs = await fileManager.GetStreamAsync(file, FileMode.Open, FileAccess.Read, FileShare.None);
-                TValue? data = await serializer.DeserializeAsync(fs);
-
-                if (data != null)
+                var res = await serializer.DeserializeAsync(fs, ct);
+                if (!res.HasValue)
                 {
-                    d.Add(Path.GetFileNameWithoutExtension(file), data);
+                    errors.Add(new ActionError<string>(file, res.Error));
+                    continue;
                 }
+                
+                d.Add(Path.GetFileNameWithoutExtension(file), res.Value);
             }
             catch (Exception e)
             {

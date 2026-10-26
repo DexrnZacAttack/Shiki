@@ -7,6 +7,10 @@ namespace Shiki.FileSystem.Implementations.Native;
 /// </summary>
 public class NativeFileManager : IPlatformFileManager
 {
+    public static NativeFileManager Instance { get; } = new();
+    
+    protected NativeFileManager() {}
+    
     /// <inheritdoc/>
     public Task<bool> ExistsAsync(string path) => Task.FromResult(File.Exists(path));
 

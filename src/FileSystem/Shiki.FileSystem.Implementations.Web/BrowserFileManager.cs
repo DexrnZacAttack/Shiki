@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using System.Runtime.Versioning;
+using Serilog;
 using Shiki.FileSystem.Abstractions;
 using Shiki.FileSystem.Implementations.Web.Stream;
 using SpawnDev.SpawnJS;
@@ -84,7 +86,7 @@ public class BrowserFileManager(WebWorkerService workerService, SpawnJSRuntime r
     {
         WebWorker? worker = await workerService.GetWebWorker();
         if (worker == null)
-            throw new NullReferenceException();
+            throw new NullReferenceException("Failed to get webworker!!!");
             
         IOPFSWorkerService f = worker.GetService<IOPFSWorkerService>();
         int id = await f.OpenAsync(path, mode);

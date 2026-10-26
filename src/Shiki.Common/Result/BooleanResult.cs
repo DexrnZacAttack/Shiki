@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.Json.Serialization;
 using Shiki.Common.Factory;
@@ -23,6 +24,7 @@ where TException : Exception
     /// <summary>
     /// Whether the operation was successful
     /// </summary>
+    [MemberNotNullWhen(false, nameof(Error))]
     public bool IsSuccessful => Error is null;
     
     /// <summary>
@@ -56,6 +58,12 @@ where TException : Exception
                                                             .Append("Error = ")
                                                             .Append(Error)
                                                             .Append(" } ").ToString();
+    
+    /// <summary>
+    /// Converts the BooleanResult into a result with a value
+    /// </summary>
+    public Result<T,TException> ToResult<T>(T value) =>
+        IsSuccessful ? new Result<T,TException>(value) : new Result<T, TException>(Error!);
     
 
     /// <summary>

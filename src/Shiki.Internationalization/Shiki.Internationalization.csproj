@@ -12,8 +12,8 @@
       <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
       <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <GenerateDocumentationFile>true</GenerateDocumentationFile>
-      <AssemblyVersion>0.0.1</AssemblyVersion>
-      <FileVersion>0.0.1</FileVersion>
+      <AssemblyVersion>0.0.2</AssemblyVersion>
+      <FileVersion>0.0.2</FileVersion>
       <Version>0.0.1</Version>
       <PackageReleaseNotes>- Initial creation
 - Translations via layered language strings

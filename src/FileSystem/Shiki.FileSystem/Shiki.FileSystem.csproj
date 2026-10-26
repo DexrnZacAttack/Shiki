@@ -14,9 +14,9 @@
         <RepositoryUrl>https://git.dexrn.me/Dexrn/Shiki/</RepositoryUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
-        <FileVersion>1.0.0</FileVersion>
-        <Version>1.0.0</Version>
+        <AssemblyVersion>1.2.0</AssemblyVersion>
+        <FileVersion>1.2.0</FileVersion>
+        <Version>1.2.0</Version>
         <PackageReleaseNotes>- Initial creation
 - Useful file system storage implementations which make use of the universal filesystem abstractions added in `Shiki.FileSystem.Abstractions`
   - Most of these were moved over from a different project I wrote this code for, and then refactored.</PackageReleaseNotes>

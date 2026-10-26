@@ -58,7 +58,7 @@ public interface IResult<out TSuccess, out TFailure> : IResultState<TFailure>
 /// <typeparam name="TValue">The expected value type</typeparam>
 /// <typeparam name="TException">The expected Exception type</typeparam>
 [JsonConverter(typeof(NotSerializableJsonConverterFactory))]
-public readonly partial struct Result<TValue, TException> : IResult<TValue?, TException?>//TODO would it be better to split into ValueResult,Result?
+public readonly partial struct Result<TValue, TException> : IResult<TValue?, TException?>//TODO remove exception requirement
     where TException : Exception
 {
     /// <summary>

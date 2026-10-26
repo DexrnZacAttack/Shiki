@@ -9,6 +9,11 @@ namespace Shiki.FileSystem.Implementations.Assembly;
 /// </summary>
 public class EmbeddedDirectoryManager(System.Reflection.Assembly assembly) : EmbeddedFileSystemNodeManager(assembly), IPlatformDirectoryManager
 {
+    /// <summary>
+    /// Gets the EmbeddedDirectoryManager for the currently executing assembly
+    /// </summary>
+    public static EmbeddedDirectoryManager OfCurrentlyExecuting { get; } = new(System.Reflection.Assembly.GetExecutingAssembly());
+    
     /// <inheritdoc/>
     public Task CreateDirectoryAsync(string path) => Task.FromException(Constants.CannotModifyException);
 

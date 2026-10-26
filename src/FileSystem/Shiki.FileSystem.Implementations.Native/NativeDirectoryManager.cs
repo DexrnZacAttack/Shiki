@@ -8,6 +8,10 @@ namespace Shiki.FileSystem.Implementations.Native;
 /// </summary>
 public class NativeDirectoryManager : IPlatformDirectoryManager
 {
+    public static NativeDirectoryManager Instance { get; } = new();
+    
+    protected NativeDirectoryManager() {}
+    
     /// <inheritdoc/>
     public Task<bool> ExistsAsync(string path) => Task.FromResult(Directory.Exists(path));
 

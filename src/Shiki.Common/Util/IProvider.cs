@@ -6,6 +6,33 @@ namespace Shiki.Common.Util;
 
 /// <summary>
 /// Simple interface to allow for a list of providers sorted by priority, chosen by whether CanProvide returns true
+///
+/// Unlike the other IProvider implementations, this one is intended for providers that work off of the state of other objects.
+/// </summary>
+/// <typeparam name="TOutput">The type that is being provided</typeparam>
+public interface IProvider<out TOutput>
+{
+    /// <summary>
+    /// The priority of the provider
+    /// </summary>
+    int Priority { get; }
+
+    /// <summary>
+    /// Whether the provider can successfully provide with the current state
+    /// </summary>
+    /// <returns>Whether this provider can successfully provide</returns>
+    bool CanProvide();
+
+    /// <summary>
+    /// Provides the object
+    /// </summary>
+    /// <returns>The provided object</returns>
+    TOutput Provide();
+}
+
+
+/// <summary>
+/// Simple interface to allow for a list of providers sorted by priority, chosen by whether CanProvide returns true
 /// </summary>
 /// <typeparam name="TOutput">The type that is being provided</typeparam>
 /// <typeparam name="TArgs">The args required to provide the type</typeparam>

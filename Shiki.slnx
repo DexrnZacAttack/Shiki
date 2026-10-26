@@ -5,6 +5,7 @@
     </Folder>
     
     <Project Path="src/Shiki.Common/Shiki.Common.csproj" />
+    <Project Path="src/Shiki.Settings/Shiki.Settings.csproj" />
     <Project Path="src/Shiki.TaskPipeline/Shiki.TaskPipeline.csproj" />
     <Project Path="src/Shiki.Internationalization/Shiki.Internationalization.csproj" />
 

@@ -14,7 +14,6 @@ namespace Shiki.ModuleManagement;
 /// <typeparam name="TModule">The module type that is stored</typeparam>
 /// <typeparam name="TArgs">The args that would be provided to each module if initializable</typeparam>
 public class ModuleStorage<TModule, TArgs> : IAsyncDisposable, IDisposable
-    where TArgs : EventArgs
     where TModule : IModule
 {
     /// <summary>
