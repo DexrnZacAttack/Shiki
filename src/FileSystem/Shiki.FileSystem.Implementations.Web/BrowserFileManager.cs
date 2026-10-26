@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using System.Runtime.Versioning;
-using Serilog;
 using Shiki.FileSystem.Abstractions;
 using Shiki.FileSystem.Implementations.Web.Stream;
 using SpawnDev.SpawnJS;
