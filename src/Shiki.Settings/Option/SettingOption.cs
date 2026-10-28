@@ -40,10 +40,24 @@ public class SettingOption<T>(Identifier id, Identifier category, T defaultValue
         set => Property.Value = value;
     }
 
+    /// <summary>
+    /// Default value for this option
+    /// </summary>
+    public T DefaultValue => defaultValue;
+    
     /// <inheritdoc/>
     public BooleanResult<Exception> SetValue(T value)
     {
         Property.Value = value;
+        return BooleanResult<Exception>.Successful;
+    }
+
+    /// <summary>
+    /// Resets the option value to its original default
+    /// </summary>
+    public BooleanResult<Exception> ResetValue()
+    {
+        Property.Value = DefaultValue;
         return BooleanResult<Exception>.Successful;
     }
 }

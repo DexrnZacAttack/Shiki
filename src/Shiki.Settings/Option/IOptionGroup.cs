@@ -1,3 +1,6 @@
+using System.Text.Json.Serialization;
+using Shiki.Common.Identity;
+
 namespace Shiki.Settings.Option;
 
 /// <summary>
@@ -12,4 +15,15 @@ public interface IOptionGroup
     /// </summary>
     /// <returns>The options in this group</returns>
     IEnumerable<IOption> GetOptions();
+}
+
+/// <summary>
+/// Simple option group interface that adds a forced Identifier to identify the group
+/// </summary>
+public interface IIdentifiableOptionGroup : IOptionGroup
+{
+    /// <summary>
+    /// Constant group identifier
+    /// </summary>
+    static abstract Identifier Identifier { get; }
 }

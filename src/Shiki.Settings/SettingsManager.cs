@@ -97,6 +97,20 @@ public class SettingsManager : IDisposable, IAsyncDisposable
     }
     
     /// <summary>
+    /// Tries to get an identifiable group by its type
+    /// </summary>
+    /// <typeparam name="T">The group type</typeparam>
+    /// <returns>The group, if found</returns>
+    public T? TryGetGroup<T>()
+        where T : class, IIdentifiableOptionGroup
+    {
+        if (Disposed)
+            return null;
+        
+        return _groups.TryGetValue(T.Identifier, out OptionGroupMetadata value) && value.Group is T t ? t : null;
+    }
+    
+    /// <summary>
     /// Loads all options in the SettingsManager
     ///
     /// This also initializes all storages to start tracking their respective option groups

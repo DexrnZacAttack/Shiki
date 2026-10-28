@@ -142,6 +142,27 @@ public class SettingsManagerBuilder
     }
 
     /// <summary>
+    /// Adds an identifiable group, throwing if it already exists or if the storage does not exist
+    /// </summary>
+    /// <param name="group">The group</param>
+    /// <param name="storage">The id of the storage for the group</param>
+    /// <typeparam name="TGroup">The group type (used to get the Identifier)</typeparam>
+    /// <returns>The builder</returns>
+    public SettingsManagerBuilder AddGroup<TGroup>(TGroup group, Identifier storage)
+        where TGroup : IIdentifiableOptionGroup => AddGroup(TGroup.Identifier, group, storage);
+    
+    /// <summary>
+    /// Tries to add an identifiable group
+    /// </summary>
+    /// <param name="group">The group</param>
+    /// <param name="storage">The id of the storage for the group</param>
+    /// <param name="result">The result</param>
+    /// <typeparam name="TGroup">The group type (used to get the Identifier)</typeparam>
+    /// <returns>The builder</returns>
+    public SettingsManagerBuilder TryAddGroup<TGroup>(TGroup group, Identifier storage, out BooleanResult<Exception> result)
+        where TGroup : IIdentifiableOptionGroup => TryAddGroup(TGroup.Identifier, group, storage, out result);
+
+    /// <summary>
     /// Adds a category, throwing if it already exists
     /// </summary>
     /// <param name="id">The storage's ID</param>
