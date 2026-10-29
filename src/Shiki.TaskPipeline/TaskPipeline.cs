@@ -84,7 +84,7 @@ where TFinalContext : ITaskContext
         }
         catch (Exception ex)
         {
-            _executionState.Status.Value = $"Failed! Exception thrown: {ex.Message}";
+            _executionState.Status.Value = $"Failed! Exception thrown: {ex}";
             
             throw;
         }

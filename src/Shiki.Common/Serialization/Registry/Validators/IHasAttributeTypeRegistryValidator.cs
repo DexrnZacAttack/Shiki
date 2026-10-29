@@ -10,3 +10,11 @@ public interface IHasAttributeTypeRegistryValidator<TAttribute> : IGlobalTypeReg
     static bool ITypeRegistryValidator.Validate(Type t) => t.GetCustomAttribute<TAttribute>() != null;
     static string ITypeRegistryValidator.GetKey(Type t) => nameof(TAttribute);
 }
+
+public interface IHasNameTypeRegistryValidator<TBase> : IGlobalTypeRegistryValidator
+{
+    static Type IGlobalTypeRegistryValidator.GetScope(Type t) => typeof(TBase);
+    
+    static bool ITypeRegistryValidator.Validate(Type t) => typeof(TBase).IsAssignableFrom(t);
+    static string ITypeRegistryValidator.GetKey(Type t) => t.FullName!;
+}
